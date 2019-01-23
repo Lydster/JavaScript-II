@@ -85,27 +85,20 @@ runners.filter(function(obj) {
 // ==== Challenge 4: Use .reduce() ====
 // The donations need to be tallied up and reported for tax purposes. Add up all the donations into a ticketPriceTotal array and log the result
 
-let ticketPriceTotal = [];
-runners.reduce(function(ticketPriceTotal, donation) {
-    ticketPriceTotal += donation
+let ticketPriceTotal =
+runners.reduce(function(total, runner) {
+    return total + runner.donation
+},0)
+
+
+runners.reduce((total, runner) =>  {
+    return total + runner.donation
 },0)
 
 
 
+//console.log(ticketPriceTotal)
 
-console.log(ticketPriceTotal);
-
-
-
-  
- 
-
-//runners.forEach(function(obj) {
-  //  ticketPriceTotal.push(obj.donation) 
-//});
-
-
-console.log(ticketPriceTotal);
 
 // ==== Challenge 5: Be Creative ====
 // Now that you have used .forEach(), .map(), .filter(), and .reduce().  I want you to think of potential problems you could solve given the data set and the 5k fun run theme.  Try to create and then solve 3 unique problems using one or many of the array methods listed above.
@@ -116,7 +109,7 @@ runners.forEach(function(obj) {
     companies.push(obj.company_name)
     return companies
 })
-console.log(companies)
+//console.log(companies)
 
 // Problem 2
 
@@ -127,24 +120,32 @@ runners.map(function(obj) {
     }
     return correctEmail;
 })
+//console.log(correctEmail)
 
-console.log(correctEmail)
+// Problem 3 Made a shirt size counter
 
-// Problem 3 tried to make a shirt size counter.. will come back to these reduce problems. 
-let sizes = []
+
+
+
+let shirts = []
 runners.forEach(function(obj) {
-    sizes.push(obj.shirt_size)
-    return sizes
-})
-console.log(sizes)
-
-let countedSizes = sizes.reduce(function(allSizes, size) {
-    if (allSizes.includes(size)) {
-        allSizes["size"]++;
-    } else {
-        allSizes["size"]= 1;
-    }
-    return allSizes;
+    shirts.push(obj.shirt_size)
+    return shirts
 })
 
-console.log(countedSizes);
+
+console.log(shirts)
+
+
+var countedShirts = shirts.reduce(function (allShirts, shirt) { 
+  if (shirt in allShirts) {
+    allShirts[shirt]++;
+  }
+  else {
+    allShirts[shirt] = 1;
+  }
+  return allShirts;
+}, {});
+
+
+console.log(countedShirts)
